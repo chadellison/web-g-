@@ -10,16 +10,18 @@ SECRET_NUMBER = rand(100)
 get '/' do
   guess = params["guess"].to_i
   response = check_guess(guess)
+  cheat = "\nTHE SECRET NUMBER IS #{@@secret_number}" if params["cheat"] == "true"
   if @@guesses_left > 0
      @@guesses_left -= 1
   else
     @@guesses_left = 5
     @@secret_number = rand(100)
-    response = "You lost. The number has been reset"
+    response = "You lost. A knew number has been generated"
   end
   erb :index, :locals => {:number => @@secret_number,
                         :response => response,
-                        :color => @@color}
+                        :color => @@color,
+                        :cheat => cheat}
 end
 
 def check_guess(guess)
