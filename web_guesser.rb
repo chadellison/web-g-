@@ -27,18 +27,23 @@ end
 def check_guess(guess)
   if guess - 5 > @@secret_number
     @@color = "red"
-    response = "Your guess is Way Too high!"
+    response = "Your guess is Way Too high!" + guesses
   elsif guess > @@secret_number
     @@color = "pink"
-    response = "Your guess is Too high!"
+    response = "Your guess is Too high!" + guesses
   elsif guess + 5 < @@secret_number
     @@color = "red"
-    response = "Your guess is Way Too low!"
+    response = "Your guess is Way Too low!" + guesses
   elsif guess < @@secret_number
     @@color = "pink"
-    response = "Your guess is Too low!"
+    response = "Your guess is Too low!" + guesses
   else
     @@color = "green"
+    @@guesses_left = 5
     response = "You got it right! THE SECRET NUMBER IS #{@@secret_number}"
   end
+end
+
+def guesses
+  "\nYou have #{@@guesses_left} guesses_left!"
 end
